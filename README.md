@@ -3,9 +3,9 @@
 A layout and a set of key scripts that turn an Elgato Stream Deck Neo into an everyday macro pad
 for a Mac that is used for coding (IntelliJ, Spring Boot, Angular).
 
-**Status:** planned, not yet set up on the device. The layout is designed and the scripts are
-written and syntax-checked, but they have not been run from a Stream Deck on a Mac yet. Treat this
-as a first version to try and adjust.
+**Status:** installed on a Mac and partly tested, not yet set up on the device. The scripts have
+been installed to `~/StreamDeck` and the safe keys run from Terminal (see [Test log](#test-log)),
+but no key has been pressed on a Stream Deck yet. Treat this as a first version to try and adjust.
 
 ## The idea
 
@@ -47,7 +47,7 @@ Three pages of eight keys, plus the scripts behind the coding page.
 
 Setup:
 
-1. Copy `scripts/` to `~/StreamDeck/` and edit the four lines at the top of `config.sh`.
+1. Copy `scripts/` to `~/StreamDeck/` and edit the five lines at the top of `config.sh`.
 2. If macOS blocks a script as downloaded, clear the flag: `xattr -dr com.apple.quarantine ~/StreamDeck`
 3. Double-click one `.command` file to test it. It opens in Terminal.
 4. In the Stream Deck app, drag **System > Open** onto a key and point it at the file.
@@ -74,7 +74,7 @@ walk you through building the pages. It asks before overwriting anything.
 | Flipping pages by hand | The coding page is its own profile tied to IntelliJ, so it appears when the IDE is in front. |
 | Still short on keys | Key Logic (Stream Deck 7.0+) gives one key a press, a double-press and a hold. Git pull, push and open pull request can share one key. |
 | One key, many steps | Multi Action for app chains; small shell scripts for anything with logic. |
-| Scripts tied to one project | Every script reads `config.sh`, so switching projects is a four-line edit. |
+| Scripts tied to one project | Every script reads `config.sh`, so switching projects is a five-line edit. |
 | A script failing silently | Each script checks its folder first and keeps the Terminal window open with a readable message. |
 
 ### What we found out
@@ -87,6 +87,23 @@ Links: [Key Logic](https://www.elgato.com/explorer/products/stream-deck/key-logi
 [Smart Profiles](https://www.elgato.com/us/en/explorer/products/stream-deck/smart-profiles-stream-deck/) ·
 [Plugin SDK](https://docs.elgato.com/streamdeck/sdk/introduction/getting-started) ·
 [Neo Infobar guide](https://docs.elgato.com/streamdeck/sdk/guides/neo-infobar)
+
+## Test log
+
+Run from Terminal on an Apple silicon Mac (macOS 27) on 2026-11-24, against a project with a Maven
+`backend/` and a Next.js `frontend/`. Nothing has been run from the Stream Deck itself yet.
+
+| Key | Result |
+|---|---|
+| Health check | Works. Prints Java, Maven, Node, Angular CLI and Docker, one per line, and waits for Return. A broken JDK shows its own error, then "not found". |
+| Git pull | Works. When the branch's remote is gone, git's message is shown and the window waits for Return; nothing changes. |
+| Open project | Works for a missing IDE: says "App not found" and waits. Not yet tried with IntelliJ installed. |
+| Run backend, Run frontend, Run tests | Not run yet (they start servers or a full test run). |
+| Git push, Open pull request | Not run as a test on purpose: they act on the real repository. |
+
+Fixes from this run: Open project now says when the IDE isn't installed instead of closing
+silently, and `config.sh` has a fifth line, `FRONTEND_SCRIPT`, because `npm start` only starts a
+dev server for Angular; Next.js and Vite need `dev`.
 
 ## What's next
 
