@@ -60,6 +60,12 @@ Setup:
 - **Focus:** an Apple Shortcut that turns on Do Not Disturb and starts a timer.
 - **Coding keys:** the scripts above.
 
+## Set up with Claude
+
+Open this folder in Claude Code on the Mac and say **"Follow PROMPT.md."** [`PROMPT.md`](PROMPT.md)
+has Claude fill in `config.sh`, install the scripts to `~/StreamDeck`, test the safe keys and
+walk you through building the pages. It asks before overwriting anything.
+
 ## How we solved it
 
 | Problem | What we did |
