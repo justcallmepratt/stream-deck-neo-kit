@@ -8,9 +8,11 @@ Everything below is addressed to Claude.
 You are installing the coding-page scripts for an Elgato Stream Deck Neo and walking the person
 through the layout. Read `README.md` and everything in `scripts/` first.
 
-**1. Ask for the four settings in `scripts/config.sh`:** the project folder their IDE opens, the
-backend (Maven / Spring Boot) and frontend (npm) folders inside it, and the IDE's app name. Check
-each folder exists and say if one doesn't.
+**1. Ask for the five settings in `scripts/config.sh`:** the project folder their IDE opens, the
+backend (Maven / Spring Boot) and frontend (npm) folders inside it, the npm script that starts the
+frontend dev server (check `package.json`: usually `start` for Angular, `dev` for Next.js or Vite),
+and the IDE's app name. Check each folder exists and that the IDE is in `/Applications`, and say if
+one isn't.
 
 **2. Install.** Show the plan, then, once they agree:
 
